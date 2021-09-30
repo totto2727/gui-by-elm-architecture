@@ -251,7 +251,11 @@ let view (state: State) (dispatch) =
 ---
 
 # Avalonia FuncUI
-
+<style>
+li {
+    line-height: 2.5;
+}
+</style>
 <div class="text-xl grid grid-cols-[50%,50%]">
 <div>
 
@@ -265,8 +269,8 @@ let view (state: State) (dispatch) =
 </div><div>
 
 ## その他の機能
-- Cmdによる非同期処理
-  - F#のasyncコンピュテーション式と合わせて柔軟な処理
+- 非同期処理
+  - Cmd＋F#のasyncコンピュテーション式
 - スタイリング
   - inline
   - XAML
@@ -275,9 +279,14 @@ let view (state: State) (dispatch) =
 
 ---
 
+<style>
+li {
+    line-height: 2.5;
+}
+</style>
 <div class="flex flex-col justify-center items-center h-full text-3xl">
 
-ここまでF#でやってきましたが…<br>
+ここまでF#でやってきましたが…
 
 他の言語はどうでしょうか？
 </div>
@@ -391,11 +400,16 @@ impl Sandbox for Counter {
 ---
 
 # 最後に
+<style>
+li {
+    line-height: 2.5;
+}
+</style>
 <div class="flex flex-col justify-center items-center h-full text-3xl">
 
-ElmアーキテクチャはWeb以外にも利用できる<br>
+ElmアーキテクチャはWeb以外にも利用できます！
 
-関数型プログラミングに詳しい方は是非色々教えてください<br>
+関数型プログラミングに詳しい方は是非色々教えてください
 
 - Twitter：[@totto2727](https://twitter.com/totto2727)
 - GitHub：[totto2727](https://github.com/totto2727)
