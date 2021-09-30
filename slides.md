@@ -224,34 +224,6 @@ let view (state: State) (dispatch) =
 <div class="h-full overflow-auto">
 
 ```f#
-type State =
-    { aboutState: About.State
-        counterState: Counter.State }
-
-type Msg =
-    | AboutMsg of About.Msg
-    | CounterMsg of Counter.Msg
-
-let init =
-    let aboutState, aboutCmd = About.init
-    let counterState = Counter.init
-
-    { aboutState = aboutState
-        counterState = counterState },
-    Cmd.batch [ aboutCmd ]
-
-let update (msg: Msg) (state: State) : State * Cmd<_> =
-    match msg with
-    | AboutMsg bpmsg ->
-        let aboutState, cmd = About.update bpmsg state.aboutState
-
-        { state with aboutState = aboutState }, Cmd.map AboutMsg cmd
-    | CounterMsg countermsg ->
-        let counterMsg =
-            Counter.update countermsg state.counterState
-
-        { state with counterState = counterMsg }, Cmd.none
-
 let view (state: State) (dispatch) =
     DockPanel.create [
         DockPanel.children [
@@ -280,7 +252,7 @@ let view (state: State) (dispatch) =
 
 # Avalonia FuncUI
 
-<div class="text-3xl grid grid-cols-[50%,50%]">
+<div class="text-xl grid grid-cols-[50%,50%]">
 <div>
 
 ## その他のUI
