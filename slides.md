@@ -36,13 +36,19 @@ li {
 
 ---
 
-<div class="flex flex-col justify-center items-center h-full text-3xl">
+# Elmアーキテクチャ<br>
+<style>
+li {
+    line-height: 2.5;
+}
+</style>
+<div class="text-3xl">
 
-Elmアーキテクチャいいですよね<br>
+- Model-View-Update<br>
 
-WebだけじゃなくてGUIアプリケーションでも使いたい…<br>
+- わかりやすいロジックでWebのUIが実装できる<br>
 
-ということで探してみました
+- デスクトップのGUIアプリでも利用したい
 </div>
 ---
 
@@ -56,17 +62,16 @@ li {
 
 ## F#
 - OCamlベースのマルチパラダイム言語
-- Pythonみたいな軽量構文
 - VB、C#と同じく.Net上で実装
-  - ライブラリを共有
   - Javaに対するScalaみたいな感じ？
+  - ライブラリを共有
 </div>
 <div>
 
 ## Avalonia FuncUI
 - C#のGUIライブラリ`Avalonia UI`のラッパー
 - クロスプラットフォーム
-- Elmアーキテクチャ（Model-View-Update）
+- Elmish採用
 - XAMLは使わない
 </div></div>
 
@@ -126,6 +131,16 @@ printfn $"{rectangle}"
 ---
 
 # Avalonia FuncUI
+## Counter
+<div class="grid grid-cols-[55%] items-center justify-center gap-5">
+
+![カウンター](/fsharp.png)
+</div>
+
+
+---
+
+# Avalonia FuncUI
 <div class="grid grid-cols-[55%,45%] justify-center gap-5">
 <div>
 
@@ -138,13 +153,10 @@ let init = { count = 0 }
 ```
 <br>
 
-## Update
+## Update&Message
 <br>
 
 ```f#
-type State = { count: int }
-let init = { count = 0 }
-
 type Msg =
     | Increment
     | Decrement
@@ -158,7 +170,7 @@ let update (msg: Msg) (state: State) : State =
 ```
 </div>
 
-![カウンター](/counter.png)
+![カウンター](/fsharp.png)
 </div>
 
 ---
@@ -200,8 +212,94 @@ let view (state: State) (dispatch) =
 ```
 </div>
 
-![カウンター](/counter.png)
+![カウンター](/fsharp.png)
 </div>
+
+---
+
+# Avalonia FuncUI
+## TabControl
+<br>
+<div class="h-[80%] grid grid-cols-[70%,30%] items-center justify-center gap-5">
+<div class="h-full overflow-auto">
+
+```f#
+type State =
+    { aboutState: About.State
+        counterState: Counter.State }
+
+type Msg =
+    | AboutMsg of About.Msg
+    | CounterMsg of Counter.Msg
+
+let init =
+    let aboutState, aboutCmd = About.init
+    let counterState = Counter.init
+
+    { aboutState = aboutState
+        counterState = counterState },
+    Cmd.batch [ aboutCmd ]
+
+let update (msg: Msg) (state: State) : State * Cmd<_> =
+    match msg with
+    | AboutMsg bpmsg ->
+        let aboutState, cmd = About.update bpmsg state.aboutState
+
+        { state with aboutState = aboutState }, Cmd.map AboutMsg cmd
+    | CounterMsg countermsg ->
+        let counterMsg =
+            Counter.update countermsg state.counterState
+
+        { state with counterState = counterMsg }, Cmd.none
+
+let view (state: State) (dispatch) =
+    DockPanel.create [
+        DockPanel.children [
+            TabControl.create [
+                TabControl.tabStripPlacement Dock.Top
+                TabControl.viewItems [
+                    TabItem.create [
+                        TabItem.header "Counter Sample"
+                        TabItem.content (Counter.view state.counterState (CounterMsg >> dispatch))
+                    ]
+                    TabItem.create [
+                        TabItem.header "About"
+                        TabItem.content (About.view state.aboutState (AboutMsg >> dispatch))
+                    ]
+                ]
+            ]
+        ]
+    ]
+```
+</div>
+
+![カウンター](/fsharp.png)
+</div>
+
+---
+
+# Avalonia FuncUI
+
+<div class="text-3xl grid grid-cols-[50%,50%]">
+<div>
+
+## その他のUI
+- テキストボックス
+- チェックボックス
+- ラジオボタン
+- アコーディオンメニュー
+- カレンダー
+- Avalonia UIをラップすれば…？
+</div><div>
+
+## その他の機能
+- Cmdによる非同期処理
+  - F#のasyncコンピュテーション式と合わせて柔軟な処理
+- スタイリング
+  - inline
+  - XAML
+</div></div>
+
 
 ---
 
@@ -209,8 +307,7 @@ let view (state: State) (dispatch) =
 
 ここまでF#でやってきましたが…<br>
 
-探してみると他の言語にも似たようなライブラリありました
-
+他の言語はどうでしょうか？
 </div>
 
 ---
@@ -321,9 +418,10 @@ impl Sandbox for Counter {
 
 ---
 
+# 最後に
 <div class="flex flex-col justify-center items-center h-full text-3xl">
 
-以上で終わり<br>
+ElmアーキテクチャはWeb以外にも利用できる<br>
 
 関数型プログラミングに詳しい方は是非色々教えてください<br>
 
