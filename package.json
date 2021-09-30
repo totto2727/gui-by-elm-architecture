@@ -10,5 +10,8 @@
     "@slidev/theme-default": "*",
     "@slidev/theme-seriph": "*"
   },
-  "name": "gui-programing-by-functional"
+  "name": "gui-programing-by-functional",
+  "devDependencies": {
+    "playwright-chromium": "^1.15.0"
+  }
 }

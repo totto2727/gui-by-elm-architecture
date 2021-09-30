@@ -12,6 +12,7 @@ highlighter: shiki
 lineNumbers: true
 drawings:
   persist: false
+download: true
 ---
 
 # ElmアーキテクチャでGUIプログラミング
