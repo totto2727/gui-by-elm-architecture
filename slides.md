@@ -13,6 +13,9 @@ lineNumbers: true
 drawings:
   persist: false
 download: true
+font:
+    sans: "Noto Sans Japanese"
+    serif: "Noto Serif Japanese"
 ---
 
 # ElmアーキテクチャでGUIプログラミング
