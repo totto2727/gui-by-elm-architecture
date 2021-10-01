@@ -12,10 +12,6 @@ highlighter: shiki
 lineNumbers: true
 drawings:
   persist: false
-download: true
-fonts:
-    sans: "Noto Sans Japanese"
-    serif: "Noto Serif Japanese"
 ---
 
 # ElmアーキテクチャでGUIプログラミング
