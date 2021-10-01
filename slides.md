@@ -13,7 +13,7 @@ lineNumbers: true
 drawings:
   persist: false
 download: true
-font:
+fonts:
     sans: "Noto Sans Japanese"
     serif: "Noto Serif Japanese"
 ---
