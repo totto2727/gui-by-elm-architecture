@@ -30,6 +30,7 @@ li {
 
 - 名前：土田快斗
 - 所属：公立千歳科学技術大学理工学部情報システム工学科
+- 最近はTwitterをパクってみようと試行錯誤しています
 - 関数型言語歴：<br>
   入門Haskellプログラミング一冊読んだ程度の初心者
 </div>
@@ -58,7 +59,7 @@ li {
     line-height: 2.5;
 }
 </style>
-<div class="grid grid-cols-[50%,50%] text-xl"><div>
+<div class="grid grid-cols-[50%,50%] text-2xl"><div>
 
 ## F#
 - OCamlベースのマルチパラダイム言語
@@ -69,7 +70,7 @@ li {
 <div>
 
 ## Avalonia FuncUI
-- C#のGUIライブラリ`Avalonia UI`のラッパー
+- C#のライブラリ`Avalonia UI`のラッパー
 - クロスプラットフォーム
 - Elmish採用
 - XAMLは使わない
@@ -94,6 +95,11 @@ printfn $"{f x}"
 let lambda = fun x -> $"{x}+1000={x + 1000}"
 printfn $"{lambda x}"
 // 出力:100+1000=1100
+
+// パイプライン
+[ 1; 2; 3 ]
+|> List.map (fun x -> x * 2)
+|> List.map (printfn "%d")
 ```
 
 ---
